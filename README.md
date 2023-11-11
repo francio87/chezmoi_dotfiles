@@ -1,2 +1,2 @@
 # chezmoi_dotfiles
-`curl -fsLS get.chezmoi.io -o setup_chez; chmod +x setup_chez; ./setup_chez -b .local/bin/ -d`
+`sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply francio87/chezmoi_dotfiles`

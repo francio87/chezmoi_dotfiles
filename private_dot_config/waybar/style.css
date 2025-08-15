@@ -1,51 +1,141 @@
-@import "waybar.css";
-
 * {
-  background-color: @background;
-  color: @foreground;
-
-  border: none;
-  border-radius: 0;
-  min-height: 0;
-  font-family: CaskaydiaMono Nerd Font;
-  font-size: 14px;
+    font-family: 'Noto Sans Mono', 'Font Awesome 6 Free', 'Font Awesome 6 Brands', monospace;
+    font-size: 13px;
+    font-weight: 600; /* medio-bold globale */
 }
 
-.modules-left {
-  margin-left: 8px;
+@define-color inactive_module_color #7a7a7a;
+
+/* ==== Barra principale ==== */
+window#waybar {
+    background-color: rgba(20, 20, 20, 0.95); /* matte black */
+    border-color: rgba(80, 80, 80, 0.4);
+    border-style: solid;
+    color: #e0e0e0;
+    transition-property: background-color;
+    transition-duration: .5s;
 }
 
-.modules-right {
-  margin-right: 8px;
+window#waybar:not(.bottom):not(.left):not(.right) {
+    border-bottom-width: 2px;
 }
 
+window#waybar.bottom {
+    border-top-width: 2px;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/* ==== Bottoni generici ==== */
+button {
+    all: unset;
+    min-height: 24px;
+    min-width: 16px;
+    padding: 0 10px;
+    transition: all 200ms ease-out;
+}
+
+button:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* ==== Moduli comuni ==== */
+.modules-left > widget > label,
+.modules-center > widget > label,
+.modules-right > widget > label {
+    color: inherit;
+    margin: 0;
+    padding: 0 10px;
+}
+
+.modules-left > widget > box,
+.modules-center > widget > box,
+.modules-right > widget > box {
+    color: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+/* ==== Workspaces ==== */
 #workspaces button {
-  all: initial;
-  padding: 0 6px;
-  margin: 0 1.5px;
-  min-width: 9px;
+    background-color: transparent;
+    color: #b0b0b0;
+    border-radius: 4px;
+    padding: 0 8px;
 }
 
-#workspaces button.empty {
-  opacity: 0.5;
+#workspaces button.active,
+#workspaces button.visible {
+    background-color: #3a3a3a;
+    color: #f5f5f5;
+    font-weight: 700; /* bold pieno */
 }
 
-#tray,
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* ==== Moduli inattivi ==== */
+#network.disconnected,
+#pulseaudio.muted,
+#wireplumber.muted,
+#idle_inhibitor,
+#mpd.paused,
+#mpd.stopped {
+    color: @inactive_module_color;
+}
+
+/* ==== Colori moduli (monocromatici, importanti in bold) ==== */
 #cpu,
-#battery,
+#memory,
+#disk,
+#backlight,
 #network,
-#bluetooth,
 #pulseaudio,
-#clock,
-#custom-omarchy {
-  min-width: 12px;
-  margin: 0 7.5px;
+#wireplumber,
+#temperature,
+#mpd,
+#language,
+#keyboard-state,
+#battery,
+#clock {
+    color: #d0d0d0;
+    font-weight: 700; /* moduli principali in bold */
 }
 
-#custom-expand-icon {
-  margin-right: 7px;
+/* Stato critico batteria */
+#battery.critical:not(.charging) {
+    color: #ff4d4d;
+    animation: blink 0.5s linear infinite alternate;
 }
 
-tooltip {
-  padding: 2px;
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
 }
+
+/* Tray */
+#tray {
+    padding: 0 5px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    animation: needs-attention 1s linear infinite alternate;
+    background-color: transparent;
+}
+
+@keyframes needs-attention {
+    to {
+        background-color: rgba(255, 77, 75, 0.3);
+    }
+}
+

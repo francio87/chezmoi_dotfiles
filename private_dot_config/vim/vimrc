@@ -61,3 +61,8 @@ set hlsearch
 
 " Set the commands to save in history default number is 20.
 set history=1000
+
+" Fix per F12 su Kitty
+set term=kitty
+set <F12>=^[[24~
+inoremap <F12> ~

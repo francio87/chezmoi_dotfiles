@@ -25,7 +25,7 @@ fi
 unset rc
 
 
-export SSH_AUTH_SOCK=/home/dav/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock
+export SSH_AUTH_SOCK=~/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock
 
 #eval "$(oh-my-posh init bash --config ~/.config/ohmyposh/EDM115-newline.omp.json)"
 eval "$(starship init bash)"

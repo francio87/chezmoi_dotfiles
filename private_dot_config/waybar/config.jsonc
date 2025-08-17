@@ -9,25 +9,34 @@
     "modules-left": [
         "hyprland/workspaces",
         "hyprland/submap",
-        "sway/scratchpad"
+        "sway/scratchpad",
+        "hyprland/window"
     ],
     "modules-center": [
-        "hyprland/window"
+        "clock"
     ],
     "modules-right": [
         "idle_inhibitor",
-        "pulseaudio",
+        "network#speed",
         "network",
+        "pulseaudio",
         "power-profiles-daemon",
         "cpu",
         "memory",
         "temperature",
         "backlight",
         "battery",
-        "clock",
         "tray"
     ],
     // Modules configuration
+
+    "hyprland/window": {
+        "format": " {} ",
+        "max-length": 60,
+        "padding-left": 10,
+        "padding-right": 50
+    },
+
     "hyprland/submap": {
         "format": "<span style=\"italic\">{}</span>"
     },
@@ -51,15 +60,20 @@
     },
     "clock": {
         // "timezone": "America/New_York",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "tooltip-format": "<big>{:%d %B %Y}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%d-%m-%Y}"
     },
     "cpu": {
         "format": "{usage}% ",
-        "tooltip": false
+        "tooltip": true,
+        "min-length": 6,
+        "align": "right",
+        "interval": 2
     },
     "memory": {
-        "format": "{}% "
+        "format": "{}% ",
+        "tooltip": true,
+        "tooltip-format": "{used:0.1f}G/{total:0.1f}G "
     },
     "temperature": {
         // "thermal-zone": 2,
@@ -105,30 +119,49 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-wifi": "{essid} {signalStrength}% ",
         "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
+        "tooltip-format": "{ifname}\nIPv4 : {ipaddr}\nGW : {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "interval": 5
     },
+        // Nuovo modulo per le velocità
+    "network#speed": {
+        "format": " {bandwidthDownBytes}  {bandwidthUpBytes}",
+        "min-length": 21,
+        "align": "right",
+        "interval": 1,  // Aggiornamento frequente per le velocità
+        "tooltip": false
+      },
     "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        },
-        "on-click": "pavucontrol"
+      "format": "{volume}% {icon}",
+      "format-muted": "  muted",
+      "format-icons": {
+        "headphone": "",
+        "default": [" ", " ", " "]
+      },
+       "on-click": "pavucontrol",
+       "scroll-step": 5
     }
+//    "pulseaudio": {
+//        // "scroll-step": 1, // %, can be a float
+//        "format": "{volume}% {icon} {format_source}",
+//        "format-bluetooth": "{volume}% {icon} {format_source}",
+//        "format-bluetooth-muted": " {icon} {format_source}",
+//        "format-muted": " {format_source}",
+//        "format-source": "{volume}% ",
+//        "format-source-muted": "",
+//        "format-icons": {
+//            "headphone": "",
+//            "hands-free": "",
+//            "headset": "",
+//            "phone": "",
+//            "portable": "",
+//            "car": "",
+//            "default": ["", "", ""]
+//        },
+//        "on-click": "pavucontrol"
+//    }
 }

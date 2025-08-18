@@ -146,3 +146,24 @@ button:hover {
     }
 }
 
+/* === Temperatura critica (lampeggiante) === */
+#temperature.critical {
+    color: #ff4d4d;
+    animation: blink-critical 0.5s linear infinite alternate;
+}
+
+@keyframes blink-critical {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+/* Se vuoi un effetto più forte (sfondo rosso) */
+/*
+@keyframes blink-critical {
+    to {
+        background-color: #ff4d4d;
+        color: #000;
+    }
+}
+*/

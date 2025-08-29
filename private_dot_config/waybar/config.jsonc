@@ -60,7 +60,7 @@
     },
     "clock": {
         // "timezone": "America/New_York",
-        "format": "{:%H:%M}  ",
+        "format": " {:%H:%M | %d-%m} ",
         "tooltip-format": "<big>{:%d %B %Y}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%d-%m-%Y}"
     },
@@ -131,7 +131,7 @@
     },
         // Nuovo modulo per le velocità
     "network#speed": {
-        "format": " {bandwidthDownBytes}  {bandwidthUpBytes}",
+        "format": "{bandwidthDownBytes}  {bandwidthUpBytes} ",
         "min-length": 21,
         "align": "right",
         "interval": 1,  // Aggiornamento frequente per le velocità
